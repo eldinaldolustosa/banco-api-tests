@@ -1,19 +1,12 @@
 const request = require('supertest');
 const {expect} = require('chai');
+const {obterToken} = require('../helpers/autenticacao');
 
 describe('Transferencias', () => {
     describe('POST /transferencias', () =>{
         it('Deve retornar 201 quando a transferencia for realizada com sucesso igual ou acima de $10,00 ', async()=>{
             //capiturar o token do login
-            const respostaLogin = await request('http://localhost:3000')
-                .post('/login')
-                .set ('Content-Type', 'application/json')
-                .send({
-                    'username': 'julio.lima',
-                    'senha': '123456'
-            })
-            //recebendo o token do login
-            const token = respostaLogin.body.token;
+            const token = await obterToken('julio.lima', '123456');
 
             const resposta = await request('http://localhost:3000')
             .post('/transferencias')
@@ -26,19 +19,10 @@ describe('Transferencias', () => {
                 'token' : ""
             })
             expect(resposta.status).to.equals(201)
-            console.log(resposta.body);
         })
         it('Deve retornar 422 quando a conta de origem for abaixo de $10,00', async ()=>{
             //capiturar o token do login
-            const respostaLogin = await request('http://localhost:3000')
-                .post('/login')
-                .set ('Content-Type', 'application/json')
-                .send({
-                    'username': 'julio.lima',
-                    'senha': '123456'
-            })
-            //recebendo o token do login
-            const token = respostaLogin.body.token;
+            const token = await obterToken('julio.lima', '123456');
 
             const resposta = await request('http://localhost:3000')
             .post('/transferencias')
@@ -51,7 +35,6 @@ describe('Transferencias', () => {
                 'token' : ""
             })
             expect(resposta.status).to.equals(422)
-            console.log(resposta.body);
         })   
     })
 })
