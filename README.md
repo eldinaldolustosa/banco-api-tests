@@ -1,112 +1,112 @@
 # banco-api-tests
 
-## Objetivo
+## Objective
 
-Projeto de automação de testes de API Rest para a aplicação **Banco API**, desenvolvido como parte de um programa de Mentoria em Teste de Software 2.0 com Julio de Lima. O projeto valida os principais endpoints da API — autenticação, transferências e consultas — garantindo que as respostas HTTP, payloads e regras de negócio estejam de acordo com o esperado.
+API Rest test automation project for the **Banco API** application, developed as part of the Software Testing Mentorship Program 2.0 with Julio de Lima. The project validates the main API endpoints — authentication, transfers, and queries — ensuring that HTTP responses, payloads, and business rules behave as expected.
 
-A API testada está disponível em: [qa-mentorship-program-banco-api](https://github.com/eldinaldolustosa/qa-mentorship-program-banco-api)
+The tested API is available at: [qa-mentorship-program-banco-api](https://github.com/eldinaldolustosa/qa-mentorship-program-banco-api)
 
 ---
 
 ## Stack
 
-| Ferramenta | Função |
+| Tool | Role |
 |---|---|
-| [Node.js](https://nodejs.org/) | Plataforma de execução JavaScript |
-| [Mocha](https://mochajs.org/) | Framework de testes (test runner) |
-| [Chai](https://www.chaijs.com/) | Biblioteca de asserções |
-| [Supertest](https://github.com/ladjs/supertest) | Cliente HTTP para testes de API |
-| [Mochawesome](https://github.com/adamgruber/mochawesome) | Gerador de relatório HTML |
-| [dotenv](https://github.com/motdotla/dotenv) | Gerenciamento de variáveis de ambiente |
+| [Node.js](https://nodejs.org/) | JavaScript runtime platform |
+| [Mocha](https://mochajs.org/) | Test framework (test runner) |
+| [Chai](https://www.chaijs.com/) | Assertion library |
+| [Supertest](https://github.com/ladjs/supertest) | HTTP client for API testing |
+| [Mochawesome](https://github.com/adamgruber/mochawesome) | HTML report generator |
+| [dotenv](https://github.com/motdotla/dotenv) | Environment variable management |
 
 ---
 
-## Estrutura de Diretórios
+## Directory Structure
 
 ```
 banco-api-tests/
-├── fixtures/                   # Payloads reutilizáveis para as requisições
-│   ├── postLogin.json          # Body de login (usuário e senha)
-│   └── postTransferencias.json # Body de criação de transferência
-├── helpers/                    # Funções auxiliares compartilhadas entre os testes
-│   └── autenticacao.js         # Função obterToken() para autenticação
-├── mochawesome-report/         # Relatório HTML gerado automaticamente após cada execução
-│   ├── assets/                 # Recursos estáticos do relatório (CSS, fontes, JS)
-│   ├── mochawesome.html        # Relatório visual em HTML
-│   └── mochawesome.json        # Dados brutos do relatório em JSON
-├── test/                       # Suites de testes organizadas por funcionalidade
-│   ├── login.test.js           # Testes do endpoint POST /login
-│   └── transferencia.test.js   # Testes dos endpoints de /transferencias
-├── .env                        # Variáveis de ambiente locais (não versionado)
-├── .env.example                # Modelo de variáveis de ambiente para configuração inicial
-├── .gitignore                  # Arquivos ignorados pelo Git
-└── package.json                # Dependências e scripts do projeto
+├── fixtures/                   # Reusable request payloads
+│   ├── postLogin.json          # Login body (username and password)
+│   └── postTransferencias.json # Transfer creation body
+├── helpers/                    # Shared helper functions across tests
+│   └── autenticacao.js         # obterToken() function for authentication
+├── mochawesome-report/         # HTML report generated automatically after each run
+│   ├── assets/                 # Report static resources (CSS, fonts, JS)
+│   ├── mochawesome.html        # Visual HTML report
+│   └── mochawesome.json        # Raw report data in JSON format
+├── test/                       # Test suites organized by feature
+│   ├── login.test.js           # Tests for POST /login endpoint
+│   └── transferencia.test.js   # Tests for /transferencias endpoints
+├── .env                        # Local environment variables (not versioned)
+├── .env.example                # Environment variable template for initial setup
+├── .gitignore                  # Files ignored by Git
+└── package.json                # Project dependencies and scripts
 ```
 
 ---
 
-## Configuração do Ambiente
+## Environment Setup
 
-### 1. Pré-requisitos
+### 1. Prerequisites
 
-- [Node.js](https://nodejs.org/) versão 18 ou superior
-- A [Banco API](https://github.com/eldinaldolustosa/qa-mentorship-program-banco-api) em execução localmente
+- [Node.js](https://nodejs.org/) version 18 or higher
+- The [Banco API](https://github.com/eldinaldolustosa/qa-mentorship-program-banco-api) running locally
 
-### 2. Instalar as dependências
+### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Configurar as variáveis de ambiente
+### 3. Configure environment variables
 
-Copie o arquivo de exemplo e ajuste conforme necessário:
+Copy the example file and adjust as needed:
 
 ```bash
 cp .env.example .env
 ```
 
-Conteúdo do `.env`:
+Contents of `.env`:
 
 ```env
 BASE_URL=http://localhost:3000
 ```
 
-> O arquivo `.env` não é versionado. Nunca o commite no repositório.
+> The `.env` file is not versioned. Never commit it to the repository.
 
 ---
 
-## Execução dos Testes
+## Running Tests
 
-### Executar todos os testes com relatório HTML
+### Run all tests with HTML report
 
 ```bash
 npm test
 ```
 
-Este comando executa todos os arquivos `*.test.js` dentro da pasta `test/`, com timeout de 200 segundos e gera automaticamente o relatório via Mochawesome.
+This command runs all `*.test.js` files inside the `test/` folder, with a 200-second timeout, and automatically generates the report via Mochawesome.
 
 ---
 
-## Relatório de Testes
+## Test Report
 
-Após a execução, o relatório é gerado automaticamente em:
+After execution, the report is automatically generated at:
 
 ```
 mochawesome-report/mochawesome.html
 ```
 
-Abra o arquivo no navegador para visualizar o resultado detalhado de cada teste, incluindo status (passou/falhou), tempo de execução e mensagens de erro.
+Open the file in a browser to view the detailed result of each test, including status (passed/failed), execution time, and error messages.
 
-> A pasta `mochawesome-report/` é ignorada pelo Git e recriada a cada execução dos testes.
+> The `mochawesome-report/` folder is ignored by Git and recreated on every test run.
 
 ---
 
-## Documentação das Dependências
+## Dependencies Documentation
 
-- [Mocha — Documentação oficial](https://mochajs.org/)
-- [Chai — Documentação oficial](https://www.chaijs.com/api/)
-- [Supertest — Repositório GitHub](https://github.com/ladjs/supertest)
-- [Mochawesome — Repositório GitHub](https://github.com/adamgruber/mochawesome)
-- [dotenv — Repositório GitHub](https://github.com/motdotla/dotenv)
-- [Node.js — Documentação oficial](https://nodejs.org/en/docs)
+- [Mocha — Official Documentation](https://mochajs.org/)
+- [Chai — Official Documentation](https://www.chaijs.com/api/)
+- [Supertest — GitHub Repository](https://github.com/ladjs/supertest)
+- [Mochawesome — GitHub Repository](https://github.com/adamgruber/mochawesome)
+- [dotenv — GitHub Repository](https://github.com/motdotla/dotenv)
+- [Node.js — Official Documentation](https://nodejs.org/en/docs)
